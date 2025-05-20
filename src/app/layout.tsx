@@ -1,12 +1,7 @@
 import type { Metadata } from 'next';
-import { GeistSans } from 'geist/font/sans'; // Corrected import for GeistSans
+import { GeistSans } from 'geist/font/sans'; // Corrected named import
 import './globals.css';
 import { Toaster } from '@/components/ui/toaster';
-
-const geistSans = GeistSans({
-  variable: '--font-geist-sans',
-  subsets: ['latin'],
-});
 
 export const metadata: Metadata = {
   title: 'Aperture Landing | Innovative Software Solutions',
@@ -20,7 +15,12 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className={`${geistSans.variable} font-sans antialiased`}>
+      {/*
+        GeistSans.variable is a className string that injects the font-face
+        and the CSS variable (--font-geist-sans).
+        font-sans utility from Tailwind will then use this variable.
+      */}
+      <body className={`${GeistSans.variable} font-sans antialiased`}>
         {children}
         <Toaster />
       </body>
